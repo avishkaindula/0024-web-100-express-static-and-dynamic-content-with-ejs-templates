@@ -6,6 +6,17 @@ const express = require("express");
 
 const app = express();
 
+// This is how we set a template engine.
+app.set("views", path.join(__dirname, "views"));
+// this will tell express where to find our template files.
+// The first "views" is a reserved word used on express
+// "views" inside the path is the name of the folder where the template files exist.
+app.set("view engine", "ejs");
+// Set will allow us to set certain "options" for the express app
+// "view engine" will tell express that we need to use an engine called template engine.
+// EJS is the name of the engine.
+// now we need to convert the html files to ejs files by renaming html project files from .html to .ejs
+
 // CSS and JavaScript files responsible for front end are examples for "static files"
 // They are pre written, therefore known as static, they are not dynamic.
 // Static files won't ever be touched or changed by the server side code.
@@ -26,19 +37,27 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "index.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "index.html");
+  // res.sendFile(htmlFilePath);
+  res.render("index");
+  // .render will render templates.
+  // Which means parse a template file with help of a template engine
+  // and then convert it into html then will be send back to the browser.
+  // the path to the index.ejs was set on this code above. =>
+  // app.set("views", path.join(__dirname, "views"));
 });
 
 app.get("/restaurants", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "restaurants.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "restaurants.html");
+  // res.sendFile(htmlFilePath);
   // This is how we serve a file (such as a HTML file) as the response.
+  res.render("restaurants");
 });
 
 app.get("/recommend", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "recommend.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "recommend.html");
+  // res.sendFile(htmlFilePath);
+  res.render("recommend");
 });
 
 app.post("/recommend", function (req, res) {
@@ -69,13 +88,15 @@ app.post("/recommend", function (req, res) {
 // It's allowed to use the same path for two different routes if we use different http methods.
 
 app.get("/confirm", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "confirm.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "confirm.html");
+  // res.sendFile(htmlFilePath);
+  res.render("confirm");
 });
 
 app.get("/about", function (req, res) {
-  const htmlFilePath = path.join(__dirname, "views", "about.html");
-  res.sendFile(htmlFilePath);
+  // const htmlFilePath = path.join(__dirname, "views", "about.html");
+  // res.sendFile(htmlFilePath);
+  res.render("about");
 });
 
 app.listen(3000);
