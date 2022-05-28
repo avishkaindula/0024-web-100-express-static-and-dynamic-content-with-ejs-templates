@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const path = require("path");
 
 const express = require("express");
@@ -21,6 +23,8 @@ app.use(express.static("public"));
 // But "we don't have to change" the links on the HTML files
 // from styles/shared.css to => public/styles/shared.css
 
+app.use(express.urlencoded({ extended: false }));
+
 app.get("/", function (req, res) {
   const htmlFilePath = path.join(__dirname, "views", "index.html");
   res.sendFile(htmlFilePath);
@@ -36,6 +40,33 @@ app.get("/recommend", function (req, res) {
   const htmlFilePath = path.join(__dirname, "views", "recommend.html");
   res.sendFile(htmlFilePath);
 });
+
+app.post("/recommend", function (req, res) {
+  // const restaurantName = req.body.name;
+  // The above code will extract the "name" from the submitted form
+
+  const restaurant = req.body;
+  // The above code will extract the entire form.
+
+  const filePath = path.join(__dirname, "data", "restaurants.json");
+
+  const fileData = fs.readFileSync(filePath);
+  const storedRestaurants = JSON.parse(fileData);
+
+  storedRestaurants.push(restaurant);
+
+  fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
+
+  // We can just send back a html response like following.
+  // res.send("<h1>Username stored!</h1>");
+  // but if the user ever try to "reload" the confirmation page,
+  // they will be asked whether to submit the form data again through an alert.
+  // And if the user hits confirm, then the same form will be submitted again.
+  // We can get rid of this by "redirecting" a user to another page like this.
+  res.redirect("/confirm");
+  // the path to the html file of /confirm has already been created by a code below.
+});
+// It's allowed to use the same path for two different routes if we use different http methods.
 
 app.get("/confirm", function (req, res) {
   const htmlFilePath = path.join(__dirname, "views", "confirm.html");

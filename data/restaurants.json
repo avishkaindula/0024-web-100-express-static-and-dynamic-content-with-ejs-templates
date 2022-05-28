@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Test Restaurant",
+    "address": "No: 5/C, Watapuluwa, Kandy",
+    "cuisine": "Sri Lankan",
+    "website": "https://watapuluwarest.com",
+    "description": "Text for testing."
+  },
+  {
+    "name": "Second Test",
+    "address": "No: 5/2C, Yatinuwara Rd, Kandy",
+    "cuisine": "Sri Lankan",
+    "website": "https://testfoodlanka.com",
+    "description": "Dummy text for testing."
+  }
+]
