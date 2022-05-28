@@ -54,6 +54,16 @@
     <main>
       <h1>Recommended restaurants</h1>
       <p>Find your next favorite restaurants with help of our other users!</p>
+      <p>We found <%= numberOfRestaurants %> restaurants.</p>
+      <!-- We need to make the content inside this html file dynamic -->
+      <!-- For that, we can use a special EJS syntax which is only available because -->
+      <!-- we are in a EJS file that will be parsed and converted by the EJS package. -->
+      <!-- EJS package will replace numberOfRestaurants with a concrete value -->
+      <!-- We can provide that value through app.js -->
+      <!-- But when we open up the browser dev tools, we can't see this special syntax -->
+      <!-- Instead we could see a normal <p></p> paragraph with the text and the number on it. -->
+      <!-- Because this file is parsed and rendered on the server, -->
+      <!-- and only the "finished" html code is sent to the browser. -->
       <ul id="restaurants-list">
         <li class="restaurant-item">
           <article>

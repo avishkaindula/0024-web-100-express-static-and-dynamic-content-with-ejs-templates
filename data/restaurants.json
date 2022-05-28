@@ -12,5 +12,12 @@
     "cuisine": "Sri Lankan",
     "website": "https://testfoodlanka.com",
     "description": "Dummy text for testing."
+  },
+  {
+    "name": "3rd Restaurant",
+    "address": "200/4B, Gatambe, Peradeniya",
+    "cuisine": "Sri Lankan",
+    "website": "https://slrest.com",
+    "description": "Dummy text for testing again."
   }
 ]

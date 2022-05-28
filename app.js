@@ -51,7 +51,16 @@ app.get("/restaurants", function (req, res) {
   // const htmlFilePath = path.join(__dirname, "views", "restaurants.html");
   // res.sendFile(htmlFilePath);
   // This is how we serve a file (such as a HTML file) as the response.
-  res.render("restaurants");
+
+  const filePath = path.join(__dirname, "data", "restaurants.json");
+  const fileData = fs.readFileSync(filePath);
+  const storedRestaurants = JSON.parse(fileData);
+  res.render("restaurants", { numberOfRestaurants: storedRestaurants.length });
+  // In the JS object above, we specify any variables we refer in the template as keys => numberOfRestaurants
+  // And then we store an value for that key.
+  // And that's the value that will be output in the template. 
+  // storedRestaurants.length will give the number of items in that array.
+  // That number is equal to the number of restaurants we've entered.
 });
 
 app.get("/recommend", function (req, res) {
