@@ -25,6 +25,8 @@
             <!-- We can't simply link to "html files" right now. -->
             <!-- / means it's appended directly after the domain name -->
             <!-- ex: www.eatwell.com/restaurants -->
+            <!-- The html file (ejs file) that we want to show when a user goes to /restaurants is set on the app.js -->
+            <!-- We've told express that we want to render "restaurants.ejs" if the user asked for /restaurants in the app.js file. -->
           </li>
           <li class="nav-item">
             <a href="/recommend">Share a Restaurant</a>
@@ -65,21 +67,30 @@
       <!-- Because this file is parsed and rendered on the server, -->
       <!-- and only the "finished" html code is sent to the browser. -->
       <ul id="restaurants-list">
+        <% for (const restaurant of restaurants) { %>
         <li class="restaurant-item">
           <article>
-            <h2>Restaurant Title</h2>
+            <h2><%= restaurant.name %></h2>
             <div class="restaurant-meta">
-              <p>Mexican</p>
-              <p>Address of the restaurant, including city</p>
+              <p><%= restaurant.cuisine %></p>
+              <p><%= restaurant.address %></p>
+              <!-- The keys used in here like "name" and "cuisine" are the same keys written inside the .json file. -->
             </div>
-            <p>
-              A short description, explaining why this restaurant is awesome!
-            </p>
+            <p><%= restaurant.description %></p>
             <div class="restaurant-actions">
-              <a href="">View Website</a>
+              <a href="<%= restaurant.website %>">View Website</a>
+              <!-- We can use EJS placeholders in "attribute values" as well. -->
+              <!-- We can use EJS placeholders in actually anywhere on this ejs file. -->
             </div>
           </article>
         </li>
+        <% } %>
+        <!-- We can write JavaScript code inside EJS files like this. -->
+        <!-- To create the for loop, we don't add a = sign after the % mark as we did on the numberOfRestaurants. -->
+        <!-- The code means that this "li" item will loop for every restaurant we insert. -->
+        <!-- The keys used in here like name and cuisine are the keys written in the .json file. -->
+        <!-- Now we need to make sure that "restaurants" is created as a key for this template in the app.js file, -->
+        <!-- just like we created "numberOfRestaurants" as a key. -->
       </ul>
     </main>
   </body>

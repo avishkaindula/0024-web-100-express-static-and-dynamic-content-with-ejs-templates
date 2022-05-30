@@ -12,10 +12,10 @@ app.set("views", path.join(__dirname, "views"));
 // The first "views" is a reserved word used on express
 // "views" inside the path is the name of the folder where the template files exist.
 app.set("view engine", "ejs");
-// Set will allow us to set certain "options" for the express app
+// "Set" will allow us to set certain "options" for the express app
 // "view engine" will tell express that we need to use an engine called template engine.
 // EJS is the name of the engine.
-// now we need to convert the html files to ejs files by renaming html project files from .html to .ejs
+// now we need to "convert" the "html" files into "ejs" files by renaming html project files from .html to .ejs
 
 // CSS and JavaScript files responsible for front end are examples for "static files"
 // They are pre written, therefore known as static, they are not dynamic.
@@ -41,7 +41,7 @@ app.get("/", function (req, res) {
   // res.sendFile(htmlFilePath);
   res.render("index");
   // .render will render templates.
-  // Which means parse a template file with help of a template engine
+  // Which means parse a template file with help of a "template engine"
   // and then convert it into html then will be send back to the browser.
   // the path to the index.ejs was set on this code above. =>
   // app.set("views", path.join(__dirname, "views"));
@@ -55,12 +55,17 @@ app.get("/restaurants", function (req, res) {
   const filePath = path.join(__dirname, "data", "restaurants.json");
   const fileData = fs.readFileSync(filePath);
   const storedRestaurants = JSON.parse(fileData);
-  res.render("restaurants", { numberOfRestaurants: storedRestaurants.length });
+  
+  res.render("restaurants", {
+    numberOfRestaurants: storedRestaurants.length,
+    restaurants: storedRestaurants,
+  });
   // In the JS object above, we specify any variables we refer in the template as keys => numberOfRestaurants
   // And then we store an value for that key.
-  // And that's the value that will be output in the template. 
+  // And that's the value that will be output in the template.
   // storedRestaurants.length will give the number of items in that array.
   // That number is equal to the number of restaurants we've entered.
+  // restaurants is the key we created for the "for loop" inside the restaurants.ejs file.
 });
 
 app.get("/recommend", function (req, res) {
