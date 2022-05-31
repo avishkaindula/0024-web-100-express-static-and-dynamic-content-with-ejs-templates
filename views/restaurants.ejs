@@ -55,6 +55,12 @@
     </aside>
     <main>
       <h1>Recommended restaurants</h1>
+      <% if (numberOfRestaurants === 0) { %>
+      <p>
+        Unfortunately, we have no restaurants yet - maybe start recommending
+        some?
+      </p>
+      <% } else { %>
       <p>Find your next favorite restaurants with help of our other users!</p>
       <p>We found <%= numberOfRestaurants %> restaurants.</p>
       <!-- We need to make the content inside this html file dynamic -->
@@ -92,6 +98,8 @@
         <!-- Now we need to make sure that "restaurants" is created as a key for this template in the app.js file, -->
         <!-- just like we created "numberOfRestaurants" as a key. -->
       </ul>
+      <% } %>
+      <!-- This is how we add a conditional if statement to an EJS file. -->
     </main>
   </body>
 </html>
